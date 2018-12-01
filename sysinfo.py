@@ -1,3 +1,6 @@
+# by yaszu
+# https://github.com/yaszu
+
 #!/usr/bin/env python3.6
 
 from pathlib import Path
@@ -6,10 +9,7 @@ import re
 
 arch = platform.machine() #Arch
 systemname = platform.system() #SytemName
-processor = platform.processor() #processor
 kernelversion = platform.release() #kernel version
-dist = platform.dist() #distro
-dist = " ".join(x for x in dist) #distro
 hostname = platform.node()
 
 with open("/proc/meminfo") as fileOpen: MemFile = fileOpen.read()
@@ -77,9 +77,21 @@ elif Path("/usr/sbin/sdhcp").exists(): dhcp = "sdhcp"
 else:
     dhcp = ""
 
+with open("/etc/os-release") as fileOpen: OsFile = fileOpen.read()
+fileOpen.closed
+
+dist = re.search("NAME=.*", OsFile)
+dist = dist.group(0)
+
+with open("/proc/cpuinfo") as fileOpen: CpuFile = fileOpen.read()
+fileOpen.closed
+
+cpu = re.search("model name.*", CpuFile)
+cpu = cpu.group(0)
+
 print("\nhostname:   {}".format(hostname),
       "\nArch:       {}".format(arch),
-      "\nProc:       {}".format(processor),
+      "\nProc:       {}".format(cpu),
       "\nKernel:     {} {}".format(systemname,kernelversion),
       "\nDistro:     {}".format(dist),
       "\nLibc:       {}".format(libc),
