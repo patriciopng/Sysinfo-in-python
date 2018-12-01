@@ -1,7 +1,6 @@
+
 # by yaszu
 # https://github.com/yaszu
-
-#!/usr/bin/env python3.6
 
 from pathlib import Path
 import platform
@@ -33,7 +32,7 @@ memUsed = float(memUsed/1024)
 
 if Path("/usr/include/gnu").exists(): libc = "glibc"
 else:
-    audio = "Alsa"
+    audio = "Musl"
 
 if Path("/usr/bin/pulseaudio").exists(): audio = "Pulseaudio"
 else:
