@@ -32,7 +32,7 @@ else:
 
 if Path("/usr/bin/pulseaudio").exists(): audio = "Pulseaudio"
 else:
-    libc = "Alsa"
+    audio = "Alsa"
 
 if Path("/etc/portage/make.conf").exists():
     with open("/etc/portage/make.conf") as fileOpen: confFile = fileOpen.read()
