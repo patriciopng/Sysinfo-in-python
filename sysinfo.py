@@ -1,7 +1,3 @@
-
-# by yaszu
-# https://github.com/yaszu
-
 from pathlib import Path
 import platform
 import re
@@ -32,11 +28,11 @@ memUsed = float(memUsed/1024)
 
 if Path("/usr/include/gnu").exists(): libc = "glibc"
 else:
-    audio = "Musl"
+    libc = "Musl"
 
 if Path("/usr/bin/pulseaudio").exists(): audio = "Pulseaudio"
 else:
-    audio = "Alsa"
+    libc = "Alsa"
 
 if Path("/etc/portage/make.conf").exists():
     with open("/etc/portage/make.conf") as fileOpen: confFile = fileOpen.read()
